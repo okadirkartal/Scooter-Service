@@ -92,16 +92,13 @@ namespace Application.Core.Services
         private decimal GetIncome(IEnumerable<RentalLogs> rentalLogs, Func<RentalLogs, bool> whereCondition = null,
             Func<RentalLogs, DateTime?> orderCondition = null)
         {
-            if (rentalLogs.Any())
-            {
-                if (whereCondition != null) rentalLogs = rentalLogs.Where(whereCondition);
-                if (orderCondition != null) rentalLogs = rentalLogs.OrderByDescending(orderCondition); 
-                
-                return (decimal) rentalLogs.Sum(x =>
-                    (x.EndDate - x.StartDate).Value.TotalMinutes * (double) x.PricePerMinute);
-            }
+            if (!rentalLogs.Any()) return 0m;
+            
+            if (whereCondition != null) rentalLogs = rentalLogs.Where(whereCondition);
+            if (orderCondition != null) rentalLogs = rentalLogs.OrderByDescending(orderCondition);
 
-            return 0m;
+            return (decimal) rentalLogs.Sum(x =>
+                (x.EndDate - x.StartDate).Value.TotalMinutes * (double) x.PricePerMinute);
         }
 
         #endregion
