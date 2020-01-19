@@ -43,7 +43,7 @@ namespace Application.Tests
         public void StartRent_ScooterIsRented_ThrowsArgumentOutOfRangeException()
         {
             var scooter = new Scooter("Scooter1", 25);
-            scooter.IsRented = true;
+            scooter.SetRented(true);
             _scooterService.GetScooterById(scooter.Id).Returns(scooter);
             Assert.Throws<RentalCompanyException>(() => _rentalCompany.StartRent(scooter.Id));
         }

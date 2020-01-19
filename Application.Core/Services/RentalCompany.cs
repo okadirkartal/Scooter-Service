@@ -33,7 +33,7 @@ namespace Application.Core.Services
             if (scooter.IsRented)
                 throw new RentalCompanyException($"This scooter : {id} is currently rented.You can not rent for now!");
 
-            scooter.IsRented = true;
+            scooter.SetRented(true);
 
             _rentalLogService.AddRentalLog(scooter.Id, scooter.PricePerMinute, RentalOperationType.StartRent);
         }
@@ -56,7 +56,7 @@ namespace Application.Core.Services
                 throw new RentalCompanyException(
                     $"This scooter : {id} is currently is not rented.You can not perform operation!");
 
-            scooter.IsRented = false;
+           scooter.SetRented(false);
 
             _rentalLogService.AddRentalLog(scooter.Id, scooter.PricePerMinute, RentalOperationType.EndRent);
 
@@ -80,6 +80,6 @@ namespace Application.Core.Services
             Guard.Against.OutOfRange(year.GetValueOrDefault(), 0, DateTime.Now.Year);
 
             return _rentalLogService.CalculateIncomeYearly(year.Value, includeNotCompletedRentals);
-        }
+        } 
     }
 }

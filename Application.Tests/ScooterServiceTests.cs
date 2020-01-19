@@ -126,7 +126,7 @@ namespace Application.Tests
         public void RemoveItemFromScooterList_WhenItemIIsRented_ThrowsScooterException()
         {
             _scooterService.AddScooter("Scooter1", 10);
-            _scooterService.GetScooterById("Scooter1").IsRented = true;
+            _scooterService.GetScooterById("Scooter1").SetRented(true);
             Assert.Throws<ScooterException>(() => _scooterService.RemoveScooter("Scooter1"));
         }
 

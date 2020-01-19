@@ -28,6 +28,12 @@ namespace Application.Core.Entities
         ///     Identify if someone is renting this
         ///     scooter
         /// </summary>
-        public bool IsRented { get; set; }
+        public bool IsRented { get; private set; }
+
+        public void SetRented(bool value)
+        {
+            this.IsRented = value;
+        }
+        
     }
 }
