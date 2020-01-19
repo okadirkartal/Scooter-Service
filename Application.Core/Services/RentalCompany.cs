@@ -19,7 +19,7 @@ namespace Application.Core.Services
         /// <summary>
         ///     Name of company
         /// </summary>
-        public string Name { get; }
+        public string Name { get; set; }
 
         /// <summary>
         ///     Start the rent of the scooter.
