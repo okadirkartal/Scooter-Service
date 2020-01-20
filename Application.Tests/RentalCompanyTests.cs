@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Threading;
 using Application.Core;
 using Application.Core.Contracts;
@@ -80,9 +81,13 @@ namespace Application.Tests
         {
             var scooter = new Scooter("Scooter1", 25);
             _scooterService.GetScooterById(scooter.Id).Returns(scooter);
+          // Stopwatch stopwatch=Stopwatch.StartNew();
             _rentalCompany.StartRent(scooter.Id);
             var income = _rentalCompany.EndRent(scooter.Id);
-            Assert.True(income > 0);
+            //stopwatch.Stop();
+            //var calculatedIncome =(decimal) TimeSpan.FromMilliseconds(stopwatch.ElapsedMilliseconds).TotalMinutes*25m;
+            //Assert.Equal(income ,calculatedIncome);
+            Assert.True(income>0);
         }
 
 

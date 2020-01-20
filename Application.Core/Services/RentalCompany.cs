@@ -75,11 +75,10 @@ namespace Application.Core.Services
         /// <returns>The total price of all rentals filtered by year if given.</returns>
         public decimal CalculateIncome(int? year, bool includeNotCompletedRentals)
         {
-            year ??= DateTime.Now.Year;
-
+         
             Guard.Against.OutOfRange(year.GetValueOrDefault(), 0, DateTime.Now.Year);
 
-            return _rentalLogService.CalculateIncomeYearly(year.Value, includeNotCompletedRentals);
+            return _rentalLogService.CalculateIncomeYearly(year, includeNotCompletedRentals);
         } 
     }
 }

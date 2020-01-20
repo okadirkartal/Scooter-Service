@@ -22,6 +22,6 @@ namespace Application.Core.Contracts
         /// </summary>
         /// <param name="year">Scooter's Id.</param>
         /// <param name="includeNotCompletedRentals">Included non-completed rentals for scooters.</param>
-        decimal CalculateIncomeYearly(int year, bool includeNotCompletedRentals);
+        decimal CalculateIncomeYearly(int? year, bool includeNotCompletedRentals);
     }
 }

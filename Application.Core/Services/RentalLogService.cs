@@ -31,18 +31,24 @@ namespace Application.Core.Services
             return GetIncome(new List<RentalLogs> {rentalLog}, x => x.ScooterId == scooterId, x => x.EndDate);
         }
 
-        public decimal CalculateIncomeYearly(int year, bool includeNotCompletedRentals)
+        public decimal CalculateIncomeYearly(int? year, bool includeNotCompletedRentals)
         {
             var incomeResult = 0m;
 
-            var completedRentalIncomes = GetIncome(_rentalLogs,
-                x => x.StartDate.Year <= year && x.EndDate.HasValue);
+            Func<RentalLogs, bool> func = null;
+            if (year.HasValue)
+              func=  x => x.StartDate.Year <= year && x.EndDate.HasValue;
+            
+            var completedRentalIncomes = GetIncome(_rentalLogs,  func);
 
 
             if (includeNotCompletedRentals)
             {
-                var incompletedRentalLogs = _rentalLogs.Where(x => x.StartDate.Year <= DateTime.Now.Year &&
-                                                                   x.EndDate == null).ToList();
+                if (year.HasValue)
+                    func =x=> x.StartDate.Year <= DateTime.Now.Year &&
+                           x.EndDate == null;
+                
+                var incompletedRentalLogs = _rentalLogs.Where(func).ToList();
 
                 var currentDate = DateTime.Now;
 

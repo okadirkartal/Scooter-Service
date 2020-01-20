@@ -34,6 +34,6 @@ namespace Application.Core.Contracts
         ///     price as if the rental would end at the time when this report was requested.
         /// </param>
         /// <returns>The total price of all rentals filtered by year if given.</returns>
-        decimal CalculateIncome(int? year, bool includeNotCompletedRentals);
+        decimal CalculateIncome(int? year, bool includeNotCompletedRentals); 
     }
 }
